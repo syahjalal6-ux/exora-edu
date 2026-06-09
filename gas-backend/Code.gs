@@ -41,14 +41,14 @@ function doGet(e) {
           : jsonError("Endpoint getAlumni belum diimplementasikan.", 501);
           
       // Modul: Analytics.gs
-      case "getAnalytics Summary":
+      case "getAnalyticsSummary":
         return typeof getAnalyticsHandler === "function" 
           ? getAnalyticsHandler(e) 
           : jsonError("Endpoint getAnalytics belum diimplementasikan.", 501);
 
       // Default jika action tidak dikenali
       default:
-        return jsonError(`Bad Request: Action '${action}' tidak dikenali.`, 400);
+        return jsonError(`Bad Request: Action GET '${action}' tidak dikenali.`, 400);
     }
     
   } catch (error) {
@@ -83,13 +83,19 @@ function doPost(e) {
     // 2. Routing Logic berdasarkan parameter 'action'
     switch (action) {
       
-      // Contoh Modul: Alumni.gs (Tambah Alumni)
+      // Modul: AcademicYears.gs
+      case "addAcademicYear":
+        return typeof addAcademicYearsHandler === "function" 
+          ? addAcademicYearsHandler(requestData) 
+          : jsonError("Endpoint addAcademicYear belum diimplementasikan.", 501);
+          
+      // Modul: Alumni.gs
       case "addAlumni":
         return typeof addAlumniHandler === "function" 
           ? addAlumniHandler(requestData) 
           : jsonError("Endpoint addAlumni belum diimplementasikan.", 501);
           
-      // Contoh Modul: Achievements.gs (Tambah Prestasi)
+      // Modul: Achievements.gs
       case "addAchievement":
         return typeof addAchievementHandler === "function" 
           ? addAchievementHandler(requestData) 
